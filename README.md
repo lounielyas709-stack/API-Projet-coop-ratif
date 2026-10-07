@@ -60,9 +60,53 @@ Une fonction de `app/outils/` lève `ErreurEntree` sur entrée invalide, `main.p
 
 ## Contribuer
 
-- Une issue par fonction, une branche par issue : `feat/12-factorielle`
-- Commits au format Conventional Commits : `feat(math): ajoute factorielle`
-- Pull request vers `main`, CI verte et une approbation avant de fusionner
+Une issue par fonction, une branche par issue, une pull request par branche. Personne ne pousse sur `main` : CI verte et une approbation avant de fusionner.
+
+### Branches
+
+`type/numéro-description`, en minuscules, mots séparés par des tirets. Le numéro est celui de l'issue.
+
+```
+feat/3-factorielle
+fix/18-division-par-zero
+docs/21-readme-installation
+```
+
+### Commits
+
+Format Conventional Commits : `type(portée): description à l'impératif`, en français, sans majuscule ni point final. La portée est le module ou le fichier concerné.
+
+```
+feat(math): ajoute la route /factorielle
+fix(math): renvoie 400 si n est négatif
+test(texte): couvre la chaîne vide
+docs(readme): détaille l'installation
+```
+
+| Type | Usage |
+|---|---|
+| `feat` | nouvelle fonctionnalité |
+| `fix` | correction de bug |
+| `test` | ajout de tests |
+| `docs` | documentation |
+| `refactor` | réorganisation sans effet sur le comportement |
+| `ci` | GitHub Actions |
+| `chore` | maintenance, configuration |
+
+### Pull requests
+
+Le titre reprend le format des commits, la description contient `Closes #numéro` pour fermer l'issue à la fusion.
+
+### Code
+
+| Élément | Convention | Exemple |
+|---|---|---|
+| Fonction d'un module | nom du sujet, `snake_case`, en français | `factorielle`, `est_premier` |
+| Route | même nom que la fonction | `/factorielle/{n}`, `/est_palindrome?texte=` |
+| Fonction de route | `route_` + nom de la fonction | `route_factorielle` |
+| Test | `test_` + fonction + cas | `test_factorielle_negative` |
+| Message d'erreur | constante en majuscules dans `app/erreurs.py` | `PARAMETRE_INVALIDE` |
+| Réponse JSON | paramètres reçus + `resultat` | `{"n": 5, "resultat": 120}` |
 
 ## Équipe
 
