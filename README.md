@@ -1,5 +1,7 @@
 # Mini API
 
+[![CI](https://github.com/lounielyas709-stack/API-Projet-coop-ratif/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lounielyas709-stack/API-Projet-coop-ratif/actions/workflows/ci.yml)
+
 API FastAPI de petits outils : math, texte, conversion et validation.
 
 ## Installation
