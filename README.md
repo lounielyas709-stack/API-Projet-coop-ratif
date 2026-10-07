@@ -29,10 +29,10 @@ curl http://localhost:8000/sante
 
 | Module | Routes |
 |---|---|
-| math | `/math/factorielle/{n}`, `/math/est_premier/{n}`, `/math/pgcd/{a}/{b}` |
-| texte | `/texte/est_palindrome?texte=`, `/texte/compter_voyelles?texte=`, `/texte/inverser?texte=` |
-| conversion | `/conversion/celsius_fahrenheit/{celsius}`, `/conversion/km_miles/{km}`, `/conversion/euros_devise/{montant}?devise=USD` |
-| validation | `/validation/email_valide?email=`, `/validation/mdp_robuste?mdp=`, `/validation/code_postal?code=` |
+| math | `/factorielle/{n}`, `/est_premier/{n}`, `/pgcd/{a}/{b}` |
+| texte | `/est_palindrome?texte=`, `/compter_voyelles?texte=`, `/inverser?texte=` |
+| conversion | `/celsius_fahrenheit/{celsius}`, `/km_miles/{km}`, `/euros_devise/{montant}?devise=USD` |
+| validation | `/email_valide?email=`, `/mdp_robuste?mdp=`, `/code_postal?code=` |
 
 Une entrée invalide renvoie 400 avec `{"detail": "..."}`.
 
