@@ -3,3 +3,4 @@ class ErreurEntree(ValueError):
 
 
 PARAMETRE_INVALIDE = "paramètre invalide"
+TEXTE_VIDE = "le texte ne doit pas être vide"
