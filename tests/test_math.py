@@ -3,7 +3,7 @@ from fastapi.testclient import TestClient
 
 from app.erreurs import N_NEGATIF, N_TROP_GRAND, ErreurEntree
 from app.main import app
-from app.outils.math import FACTORIELLE_MAX, factorielle
+from app.outils.math import FACTORIELLE_MAX, PREMIER_MAX, est_premier, factorielle
 
 client = TestClient(app)
 
@@ -46,3 +46,26 @@ def test_route_factorielle_trop_grand():
     reponse = client.get("/factorielle/1001")
     assert reponse.status_code == 400
     assert reponse.json() == {"detail": N_TROP_GRAND}
+
+
+def test_est_premier_7():
+    assert est_premier(7)
+
+
+def test_est_premier_9():
+    assert not est_premier(9)
+
+
+def test_est_premier_0_1():
+    assert not est_premier(0)
+    assert not est_premier(1)
+
+
+def test_est_premier_negatif():
+    with pytest.raises(ErreurEntree):
+        est_premier(-1)
+
+
+def test_est_premier_trop_grand():
+    with pytest.raises(ErreurEntree):
+        est_premier(PREMIER_MAX + 1)
