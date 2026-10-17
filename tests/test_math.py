@@ -1,7 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from app.erreurs import N_NEGATIF, N_TROP_GRAND, ErreurEntree
+from app.erreurs import N_NEGATIF, N_TROP_GRAND, PREMIER_TROP_GRAND, ErreurEntree
 from app.main import app
 from app.outils.math import FACTORIELLE_MAX, PREMIER_MAX, est_premier, factorielle
 
@@ -69,3 +69,21 @@ def test_est_premier_negatif():
 def test_est_premier_trop_grand():
     with pytest.raises(ErreurEntree):
         est_premier(PREMIER_MAX + 1)
+
+
+def test_route_est_premier_7():
+    reponse = client.get("/est_premier/7")
+    assert reponse.status_code == 200
+    assert reponse.json() == {"n": 7, "resultat": True}
+
+
+def test_route_est_premier_negatif():
+    reponse = client.get("/est_premier/-1")
+    assert reponse.status_code == 400
+    assert reponse.json() == {"detail": N_NEGATIF}
+
+
+def test_route_est_premier_trop_grand():
+    reponse = client.get("/est_premier/1000000000001")
+    assert reponse.status_code == 400
+    assert reponse.json() == {"detail": PREMIER_TROP_GRAND}
