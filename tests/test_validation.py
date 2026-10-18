@@ -1,7 +1,11 @@
 import pytest
+from fastapi.testclient import TestClient
 
-from app.erreurs import ErreurEntree
+from app.erreurs import EMAIL_VIDE, ErreurEntree
+from app.main import app
 from app.outils.validation import email_valide
+
+client = TestClient(app)
 
 
 def test_email_valide():
@@ -12,7 +16,7 @@ def test_email_valide_sans_arobase():
     assert not email_valide("alex.mail.com")
 
 
-def test_email_valide_avec_deux_apostrphe():
+def test_email_valide_avec_deux_arobase():
     assert not email_valide("alex@@mail.com")
 
 
@@ -36,3 +40,21 @@ def test_email_valide_espace():
 def test_email_valide_vide():
     with pytest.raises(ErreurEntree):
         email_valide("")
+
+
+def test_route_email_valide():
+    reponse = client.get("/email_valide?email=alex@mail.fr")
+    assert reponse.status_code == 200
+    assert reponse.json() == {"email": "alex@mail.fr", "resultat": True}
+
+
+def test_route_email_invalide():
+    reponse = client.get("/email_valide?email=alex.mail.fr")
+    assert reponse.status_code == 200
+    assert reponse.json() == {"email": "alex.mail.fr", "resultat": False}
+
+
+def test_route_email_valide_vide():
+    reponse = client.get("/email_valide?email=")
+    assert reponse.status_code == 400
+    assert reponse.json() == {"detail": EMAIL_VIDE}
