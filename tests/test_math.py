@@ -2,6 +2,8 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.erreurs import (
+    A_B_NEGATIF,
+    A_B_NULS,
     N_NEGATIF,
     N_TROP_GRAND,
     PREMIER_TROP_GRAND,
@@ -114,3 +116,21 @@ def test_pgcd_negatif():
 def test_pgcd_deux_nuls():
     with pytest.raises(ErreurEntree):
         pgcd(0, 0)
+
+
+def test_route_pgcd():
+    reponse = client.get("/pgcd/12/18")
+    assert reponse.status_code == 200
+    assert reponse.json() == {"a": 12, "b": 18, "resultat": 6}
+
+
+def test_route_pgcd_negatif():
+    reponse = client.get("/pgcd/-4/6")
+    assert reponse.status_code == 400
+    assert reponse.json() == {"detail": A_B_NEGATIF}
+
+
+def test_route_pgcd_nuls():
+    reponse = client.get("/pgcd/0/0")
+    assert reponse.status_code == 400
+    assert reponse.json() == {"detail": A_B_NULS}
