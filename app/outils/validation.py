@@ -6,7 +6,7 @@ def email_valide(email: str) -> bool:
         raise ErreurEntree(EMAIL_VIDE)
     if email.count("@") != 1:
         return False
-    if "" in email:
+    if " " in email:
         return False
     avant, apres = email.split("@")
     if avant == "":
