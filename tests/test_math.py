@@ -1,9 +1,14 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from app.erreurs import N_NEGATIF, N_TROP_GRAND, PREMIER_TROP_GRAND, ErreurEntree
+from app.erreurs import (
+    N_NEGATIF,
+    N_TROP_GRAND,
+    PREMIER_TROP_GRAND,
+    ErreurEntree,
+)
 from app.main import app
-from app.outils.math import FACTORIELLE_MAX, PREMIER_MAX, est_premier, factorielle
+from app.outils.math import FACTORIELLE_MAX, PREMIER_MAX, est_premier, factorielle, pgcd
 
 client = TestClient(app)
 
@@ -87,3 +92,25 @@ def test_route_est_premier_trop_grand():
     reponse = client.get("/est_premier/1000000000001")
     assert reponse.status_code == 400
     assert reponse.json() == {"detail": PREMIER_TROP_GRAND}
+
+
+def test_pgcd_12_et_18():
+    assert pgcd(12, 18) == 6
+
+
+def test_pgcd_5_et_7():
+    assert pgcd(5, 7) == 1
+
+
+def test_pgcd_0_et_5():
+    assert pgcd(0, 5) == 5
+
+
+def test_pgcd_negatif():
+    with pytest.raises(ErreurEntree):
+        pgcd(-4, 6)
+
+
+def test_pgcd_deux_nuls():
+    with pytest.raises(ErreurEntree):
+        pgcd(0, 0)
