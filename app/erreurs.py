@@ -3,3 +3,4 @@ class ErreurEntree(ValueError):
 
 
 PARAMETRE_INVALIDE = "paramètre invalide"
+DISTANCE_NEGATIVE = "la distance ne doit pas être négative"
