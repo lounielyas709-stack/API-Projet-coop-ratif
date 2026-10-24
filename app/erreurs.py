@@ -3,3 +3,5 @@ class ErreurEntree(ValueError):
 
 
 PARAMETRE_INVALIDE = "paramètre invalide"
+MONTANT_NEGATIF = "le montant ne doit pas être négatif"
+DEVISE_INCONNUE = "la devise est inconnue"
