@@ -1,6 +1,13 @@
 import math
 
-from app.erreurs import N_NEGATIF, N_TROP_GRAND, PREMIER_TROP_GRAND, ErreurEntree
+from app.erreurs import (
+    A_B_NEGATIF,
+    A_B_NULS,
+    N_NEGATIF,
+    N_TROP_GRAND,
+    PREMIER_TROP_GRAND,
+    ErreurEntree,
+)
 
 # Au-delà de 1558, le résultat dépasse 4300 chiffres et Python refuse de le convertir en JSON
 FACTORIELLE_MAX = 1000
@@ -27,3 +34,12 @@ def est_premier(n: int) -> bool:
             return False
 
     return True
+
+
+def pgcd(a: int, b: int) -> int:
+    if a < 0 or b < 0:
+        raise ErreurEntree(A_B_NEGATIF)
+    if a == 0 and b == 0:
+        raise ErreurEntree(A_B_NULS)
+
+    return math.gcd(a, b)
