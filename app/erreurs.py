@@ -3,12 +3,14 @@ class ErreurEntree(ValueError):
 
 
 PARAMETRE_INVALIDE = "paramètre invalide"
-
-
+PARAMETRE_INVALIDE = "paramètre invalide"
 
 TEMPERATURE_SOUS_ZERO_ABSOLU = (
     "la température ne peut pas être inférieure au zéro absolu"
 )
+
+TEXTE_VIDE = "le texte doit contenir au moins une lettre ou un chiffre"
+MDP_VIDE = "le mot de passe ne peut pas être vide"
 
 N_NEGATIF = "n doit être positif"
 N_TROP_GRAND = "n doit être inférieur ou égal à 1000"
