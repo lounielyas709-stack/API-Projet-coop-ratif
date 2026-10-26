@@ -3,6 +3,8 @@ class ErreurEntree(ValueError):
 
 
 PARAMETRE_INVALIDE = "paramètre invalide"
+TEXTE_VIDE = "le texte doit contenir au moins une lettre ou un chiffre"
+MDP_VIDE = "le mot de passe ne peut pas être vide"
 N_NEGATIF = "n doit être positif"
 N_TROP_GRAND = "n doit être inférieur ou égal à 1000"
 A_B_NEGATIF = "a et b doivent être positifs ou nuls"
