@@ -1,4 +1,4 @@
-from app.erreurs import MDP_VIDE, ErreurEntree
+from app.erreurs import EMAIL_VIDE, MDP_VIDE, ErreurEntree
 
 LONGUEUR_MIN = 8
 
@@ -28,7 +28,6 @@ def mdp_robuste(mdp: str) -> bool:
             a_special = True
 
     return a_majuscule and a_minuscule and a_chiffre and a_special
-from app.erreurs import EMAIL_VIDE, ErreurEntree
 
 
 def email_valide(email: str) -> bool:
