@@ -2,6 +2,7 @@ import math
 
 from app.erreurs import N_NEGATIF, N_TROP_GRAND, PREMIER_TROP_GRAND, ErreurEntree
 
+# Au-delà de 1558, le résultat dépasse 4300 chiffres et Python refuse de le convertir en JSON
 FACTORIELLE_MAX = 1000
 PREMIER_MAX = 10**12
 
