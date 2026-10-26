@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.outils.texte import compter_voyelles, est_palindrome
+from app.outils.texte import compter_voyelles, est_palindrome, inverser
 
 router = APIRouter(tags=["texte"])
 
@@ -18,4 +18,12 @@ def route_compter_voyelles(texte: str):
     return {
         "texte": texte,
         "resultat": compter_voyelles(texte)
+    }
+
+
+@router.get("/inverser")
+def route_inverser(texte: str):
+    return {
+        "texte": texte,
+        "resultat": inverser(texte)
     }
