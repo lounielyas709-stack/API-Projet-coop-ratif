@@ -112,9 +112,14 @@ def test_pgcd_0_et_5():
     assert pgcd(0, 5) == 5
 
 
-def test_pgcd_negatif():
+def test_pgcd_a_negatif():
     with pytest.raises(ErreurEntree):
         pgcd(-4, 6)
+
+
+def test_pgcd_b_negatif():
+    with pytest.raises(ErreurEntree):
+        pgcd(4, -6)
 
 
 def test_pgcd_deux_nuls():
@@ -128,7 +133,7 @@ def test_route_pgcd():
     assert reponse.json() == {"a": 12, "b": 18, "resultat": 6}
 
 
-def test_route_pgcd_negatif():
+def test_route_pgcd_a_negatif():
     reponse = client.get("/pgcd/-4/6")
     assert reponse.status_code == 400
     assert reponse.json() == {"detail": A_B_NEGATIF}
