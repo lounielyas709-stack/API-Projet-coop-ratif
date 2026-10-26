@@ -37,6 +37,14 @@ def test_email_valide_espace():
     assert not email_valide("alex@ma il.fr")
 
 
+def test_email_valide_tabulation():
+    assert not email_valide("alex@ma\til.fr")
+
+
+def test_email_valide_points_consecutifs():
+    assert not email_valide("alex@ma..fr")
+
+
 def test_email_valide_vide():
     with pytest.raises(ErreurEntree):
         email_valide("")
