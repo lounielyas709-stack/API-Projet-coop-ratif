@@ -48,6 +48,10 @@ def test_route_factorielle_trop_grand():
     assert reponse.json() == {"detail": N_TROP_GRAND}
 
 
+def test_est_premier_2():
+    assert est_premier(2)
+
+
 def test_est_premier_7():
     assert est_premier(7)
 
