@@ -28,3 +28,12 @@ def compter_voyelles(texte: str) -> int:
         if caractere in VOYELLES:
             total += 1
     return total
+
+
+def inverser(texte: str) -> str:
+    # un texte vide ou fait seulement d'espaces est invalide
+    if texte.strip() == "":
+        raise ErreurEntree(TEXTE_VIDE)
+
+    # [::-1] lit le texte de la fin vers le début
+    return texte[::-1]
