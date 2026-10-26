@@ -10,6 +10,7 @@ client = TestClient(app)
 
 # --- la fonction ---
 
+
 def test_mdp_robuste_normal():
     assert mdp_robuste("Abc12345!") is True
     assert mdp_robuste("abc") is False
@@ -46,6 +47,7 @@ def test_mdp_robuste_erreur():
 
 # --- la route ---
 
+
 def test_route_mdp_robuste_normal():
     r = client.get("/mdp_robuste", params={"mdp": "Abc12345!"})
     assert r.status_code == 200
@@ -68,6 +70,8 @@ def test_route_mdp_robuste_sans_parametre():
     r = client.get("/mdp_robuste")
     assert r.status_code == 400
     assert r.json() == {"detail": PARAMETRE_INVALIDE}
+
+
 def test_email_valide():
     assert email_valide("alex@mail.fr")
 

@@ -10,6 +10,7 @@ client = TestClient(app)
 
 # --- est_palindrome : la fonction ---
 
+
 def test_est_palindrome_normal():
     assert est_palindrome("kayak") is True
     assert est_palindrome("bonjour") is False
@@ -26,6 +27,7 @@ def test_est_palindrome_erreur():
 
 
 # --- est_palindrome : la route ---
+
 
 def test_route_est_palindrome_normal():
     r = client.get("/est_palindrome", params={"texte": "kayak"})
@@ -47,6 +49,7 @@ def test_route_est_palindrome_sans_texte():
 
 # --- compter_voyelles : la fonction ---
 
+
 def test_compter_voyelles_normal():
     assert compter_voyelles("bonjour") == 3
 
@@ -62,6 +65,7 @@ def test_compter_voyelles_erreur():
 
 
 # --- compter_voyelles : la route ---
+
 
 def test_route_compter_voyelles_normal():
     r = client.get("/compter_voyelles", params={"texte": "bonjour"})
@@ -83,6 +87,7 @@ def test_route_compter_voyelles_sans_texte():
 
 # --- inverser : la fonction ---
 
+
 def test_inverser_normal():
     assert inverser("bonjour") == "ruojnob"
 
@@ -98,6 +103,7 @@ def test_inverser_erreur():
 
 
 # --- inverser : la route ---
+
 
 def test_route_inverser_normal():
     r = client.get("/inverser", params={"texte": "bonjour"})

@@ -1,4 +1,14 @@
-from app.erreurs import TEMPERATURE_SOUS_ZERO_ABSOLU, ErreurEntree
+from app.erreurs import (
+    DISTANCE_NEGATIVE,
+    TEMPERATURE_SOUS_ZERO_ABSOLU,
+    ErreurEntree,
+)
+
+
+def km_miles(km: float) -> float:
+    if km < 0:
+        raise ErreurEntree(DISTANCE_NEGATIVE)
+    return round(km / 1.609344, 2)
 
 
 def celsius_fahrenheit(celsius: float) -> float:
