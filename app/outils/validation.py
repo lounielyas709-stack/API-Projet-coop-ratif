@@ -6,12 +6,15 @@ def email_valide(email: str) -> bool:
         raise ErreurEntree(EMAIL_VIDE)
     if email.count("@") != 1:
         return False
-    if " " in email:
-        return False
+    for caractere in email:
+        if caractere.isspace():
+            return False
     avant, apres = email.split("@")
     if avant == "":
         return False
     if "." not in apres or apres.startswith(".") or apres.endswith("."):
+        return False
+    if ".." in apres:
         return False
 
     return True
