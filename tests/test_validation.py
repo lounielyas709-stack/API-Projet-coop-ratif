@@ -1,12 +1,9 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from app.erreurs import MDP_VIDE, PARAMETRE_INVALIDE, ErreurEntree
+from app.erreurs import EMAIL_VIDE, MDP_VIDE, PARAMETRE_INVALIDE, ErreurEntree
 from app.main import app
-from app.outils.validation import mdp_robuste
-from app.erreurs import EMAIL_VIDE, ErreurEntree
-from app.main import app
-from app.outils.validation import email_valide
+from app.outils.validation import email_valide, mdp_robuste
 
 client = TestClient(app)
 
