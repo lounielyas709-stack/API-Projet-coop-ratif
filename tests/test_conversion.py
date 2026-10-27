@@ -2,7 +2,9 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.erreurs import (
+    DEVISE_INCONNUE,
     DISTANCE_NEGATIVE,
+    MONTANT_NEGATIF,
     TEMPERATURE_SOUS_ZERO_ABSOLU,
     ErreurEntree,
 )
@@ -47,19 +49,17 @@ def test_euros_devise_zero_en_minuscules():
 
 
 def test_euros_devise_montant_negatif():
-    try:
+    with pytest.raises(ErreurEntree) as exc_info:
         euros_devise(-10, "USD")
-        assert False, "Une ErreurEntree était attendue"
-    except ValueError as erreur:
-        assert str(erreur) == "le montant ne doit pas être négatif"
+
+    assert str(exc_info.value) == MONTANT_NEGATIF
 
 
 def test_euros_devise_devise_inconnue():
-    try:
+    with pytest.raises(ErreurEntree) as exc_info:
         euros_devise(100, "XYZ")
-        assert False, "Une ErreurEntree était attendue"
-    except ValueError as erreur:
-        assert str(erreur) == "la devise est inconnue"
+
+    assert str(exc_info.value) == DEVISE_INCONNUE
 
 
 # Tests de la route HTTP
@@ -80,14 +80,14 @@ def test_route_euros_devise_montant_negatif():
     reponse = client.get("/euros_devise/-10?devise=USD")
 
     assert reponse.status_code == 400
-    assert reponse.json()["detail"] == "le montant ne doit pas être négatif"
+    assert reponse.json()["detail"] == MONTANT_NEGATIF
 
 
 def test_route_euros_devise_devise_inconnue():
     reponse = client.get("/euros_devise/100?devise=XYZ")
 
     assert reponse.status_code == 400
-    assert reponse.json()["detail"] == "la devise est inconnue"
+    assert reponse.json()["detail"] == DEVISE_INCONNUE
 
 
 def test_route_euros_devise_devise_absente():
