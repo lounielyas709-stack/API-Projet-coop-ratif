@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+
 from app.outils.validation import code_postal, email_valide, mdp_robuste
 
 router = APIRouter(tags=["validation"])

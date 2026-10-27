@@ -9,7 +9,7 @@ def code_postal(code: str) -> bool:
     if not code:
         raise ErreurEntree(CODE_POSTAL_VIDE)
 
-    return bool(re.fullmatch(r"\d{5}", code))
+    return bool(re.fullmatch(r"[0-9]{5}", code))
 
 
 def mdp_robuste(mdp: str) -> bool:
