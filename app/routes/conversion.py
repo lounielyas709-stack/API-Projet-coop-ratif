@@ -1,8 +1,17 @@
 from fastapi import APIRouter
 
-from app.outils.conversion import celsius_fahrenheit, km_miles
+from app.outils.conversion import celsius_fahrenheit, euros_devise, km_miles
 
 router = APIRouter(tags=["conversion"])
+
+
+@router.get("/euros_devise/{montant}")
+def route_euros_devise(montant: float, devise: str):
+    return {
+        "montant": montant,
+        "devise": devise.upper(),
+        "resultat": euros_devise(montant, devise),
+    }
 
 
 @router.get("/km_miles/{km}")

@@ -4,6 +4,10 @@ class ErreurEntree(ValueError):
 
 PARAMETRE_INVALIDE = "paramètre invalide"
 
+MONTANT_NEGATIF = "le montant ne doit pas être négatif"
+DEVISE_INCONNUE = "la devise est inconnue"
+
+
 DISTANCE_NEGATIVE = "la distance ne doit pas être négative"
 
 TEMPERATURE_SOUS_ZERO_ABSOLU = "la température ne peut pas être inférieure au zéro absolu"
