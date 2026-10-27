@@ -1,6 +1,15 @@
-from app.erreurs import EMAIL_VIDE, MDP_VIDE, ErreurEntree
+
+import re
+
+from app.erreurs import CODE_POSTAL_VIDE, EMAIL_VIDE, MDP_VIDE, ErreurEntree
 
 LONGUEUR_MIN = 8
+
+def code_postal(code: str) -> bool:
+    if not code:
+        raise ErreurEntree(CODE_POSTAL_VIDE)
+
+    return bool(re.fullmatch(r"[0-9]{5}", code))
 
 
 def mdp_robuste(mdp: str) -> bool:

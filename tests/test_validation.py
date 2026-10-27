@@ -1,11 +1,62 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from app.erreurs import EMAIL_VIDE, MDP_VIDE, PARAMETRE_INVALIDE, ErreurEntree
+from app.erreurs import (
+    CODE_POSTAL_VIDE,
+    EMAIL_VIDE,
+    MDP_VIDE,
+    PARAMETRE_INVALIDE,
+    ErreurEntree,
+)
 from app.main import app
-from app.outils.validation import email_valide, mdp_robuste
+from app.outils.validation import code_postal, email_valide, mdp_robuste
 
 client = TestClient(app)
+
+# Tests de la fonction code_postal
+
+def test_code_postal_valide():
+    assert code_postal("94220") is True
+    assert code_postal("75001") is True
+
+
+def test_code_postal_formats_invalides():
+    assert code_postal("123") is False
+    assert code_postal("7500A") is False
+    assert code_postal("999999") is False
+
+
+def test_code_postal_vide():
+    with pytest.raises(ErreurEntree, match=CODE_POSTAL_VIDE):
+        code_postal("")
+
+# Tests de la route HTTP
+
+def test_route_code_postal_succes():
+    reponse = client.get("/code_postal?code=94220")
+
+    assert reponse.status_code == 200
+    assert reponse.json() == {
+        "code": "94220",
+        "resultat": True,
+    }
+
+
+def test_route_code_postal_invalide():
+    reponse = client.get("/code_postal?code=7500A")
+
+    assert reponse.status_code == 200
+    assert reponse.json() == {
+        "code": "7500A",
+        "resultat": False,
+    }
+
+
+def test_route_code_postal_vide():
+    reponse = client.get("/code_postal?code=")
+
+    assert reponse.status_code == 400
+    assert reponse.json()["detail"] == CODE_POSTAL_VIDE
 
 
 # --- la fonction ---
@@ -130,3 +181,4 @@ def test_route_email_valide_vide():
     reponse = client.get("/email_valide?email=")
     assert reponse.status_code == 400
     assert reponse.json() == {"detail": EMAIL_VIDE}
+

@@ -1,8 +1,15 @@
 from fastapi import APIRouter
 
-from app.outils.validation import email_valide, mdp_robuste
+from app.outils.validation import code_postal, email_valide, mdp_robuste
 
 router = APIRouter(tags=["validation"])
+
+@router.get("/code_postal")
+def route_code_postal(code: str):
+    return {
+        "code":code,
+        "resultat": code_postal(code),
+    }
 
 
 @router.get("/mdp_robuste")

@@ -4,6 +4,9 @@ class ErreurEntree(ValueError):
 
 PARAMETRE_INVALIDE = "paramètre invalide"
 
+CODE_POSTAL_VIDE = "le code postal ne doit pas être vide"
+
+
 MONTANT_NEGATIF = "le montant ne doit pas être négatif"
 DEVISE_INCONNUE = "la devise est inconnue"
 
