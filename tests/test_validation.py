@@ -1,7 +1,13 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from app.erreurs import EMAIL_VIDE, MDP_VIDE, PARAMETRE_INVALIDE, ErreurEntree
+from app.erreurs import (
+    CODE_POSTAL_VIDE,
+    EMAIL_VIDE,
+    MDP_VIDE,
+    PARAMETRE_INVALIDE,
+    ErreurEntree,
+)
 from app.main import app
 from app.outils.validation import code_postal, email_valide, mdp_robuste
 
@@ -21,8 +27,8 @@ def test_code_postal_formats_invalides():
 
 
 def test_code_postal_vide():
-   with pytest.raises(ErreurEntree, match="le code postal ne doit pas être vide"):
-       code_postal("")
+    with pytest.raises(ErreurEntree, match=CODE_POSTAL_VIDE):
+        code_postal("")
 
 # Tests de la route HTTP
 
@@ -50,7 +56,7 @@ def test_route_code_postal_vide():
     reponse = client.get("/code_postal?code=")
 
     assert reponse.status_code == 400
-    assert reponse.json()["detail"] == "le code postal ne doit pas être vide"
+    assert reponse.json()["detail"] == CODE_POSTAL_VIDE
 
 
 # --- la fonction ---
